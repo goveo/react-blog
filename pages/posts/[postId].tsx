@@ -1,11 +1,32 @@
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
+import { connect, ConnectedProps } from 'react-redux';
 import { useRouter } from 'next/router';
 import Post from '../../components/Post';
+import { PostsState } from '../../store/actions/types';
+import { loadPost } from '../../store/actions/postsActions';
+import Page from '../../components/Page';
 
-const PostPage: React.FC = () => {
+const mapStateToProps = (state: { posts: PostsState }) => ({
+  post: state.posts.post,
+});
+const connector = connect(mapStateToProps, { loadPost });
+
+const PostPage: React.FC<ConnectedProps<typeof connector>> = ({ post, loadPost }) => {
   const router = useRouter();
-  //router.query.postId
-  return <Post title={'test'} body={'body test'} />;
+
+  const postId = useMemo(() => {
+    return Number(router.query.postId);
+  }, [router.query.postId]);
+
+  useEffect(() => {
+    if (postId) loadPost(postId);
+  }, [loadPost, postId]);
+
+  return (
+    <Page>
+      <Post {...post} />
+    </Page>
+  );
 };
 
-export default PostPage;
+export default connector(PostPage);

@@ -2,12 +2,13 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import styled from 'styled-components';
 
-interface Props {
+export interface PostProps {
+  id: number;
   title: string;
   body: string;
 }
 
-const Post: React.FC<Props> = ({ title, body }) => {
+export const Post: React.FC<PostProps> = ({ title, body }) => {
   return (
     <>
       <Title>{title}</Title>
@@ -16,7 +17,7 @@ const Post: React.FC<Props> = ({ title, body }) => {
   );
 };
 
-const Title = styled(Typography)`
+export const Title = styled(Typography)`
   font-size: 24px;
   font-weight: bold;
 `;
