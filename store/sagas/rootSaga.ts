@@ -1,8 +1,8 @@
 import { all } from 'redux-saga/effects';
-import { watchLoadAllPostsAsync, watchLoadPostAsync } from './posts.sagas';
+import { watchLoadAllPostsAsync, watchLoadPostAsync, watchAddPostAsync } from './posts.sagas';
 
 export const rootSaga = function* root() {
-  yield all([watchLoadAllPostsAsync(), watchLoadPostAsync()]);
+  yield all([watchLoadAllPostsAsync(), watchLoadPostAsync(), watchAddPostAsync()]);
 };
 
 export default rootSaga;

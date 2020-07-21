@@ -9,6 +9,11 @@ export interface Post {
   body: string;
 }
 
+export interface PostPayload {
+  title: string;
+  body: string;
+}
+
 export interface PostsState {
   posts: Post[];
   post: Post;

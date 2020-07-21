@@ -4,7 +4,7 @@
 // [L, XL): l width
 // [XL, inf): xl width
 
-export enum Width {
+export enum ScreenWidth {
   XS = 0,
   S = 600,
   M = 960,
@@ -22,5 +22,5 @@ export interface MediaWidth {
 
 export const mediaWidth: MediaWidth = Object.assign(
   {},
-  ...Object.entries(Width).map(([key, value]) => ({ [key.toLowerCase()]: `@media (min-width: ${value}px)` })),
+  ...Object.entries(ScreenWidth).map(([key, value]) => ({ [key.toLowerCase()]: `@media (min-width: ${value}px)` })),
 );

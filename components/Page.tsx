@@ -27,7 +27,7 @@ const Page: React.FC<Props> = ({ title = 'React-blog', description = 'Develops T
 };
 
 const Content = styled(Container)`
-  margin-top: 1rem;
+  margin-top: 30px;
 `;
 
 export default Page;

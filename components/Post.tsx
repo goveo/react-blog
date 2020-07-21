@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import styled from 'styled-components';
-import { mediaWidth } from '../lib/mediaWidth';
+import { mediaWidth } from '../lib/media/mediaWidth';
 
 export interface PostProps {
   id: number;
@@ -9,17 +9,17 @@ export interface PostProps {
   body: string;
 }
 
-export const Post: React.FC<PostProps> = ({ id, title, body }) => {
+const Post: React.FC<PostProps> = ({ id, title, body }) => {
   return (
     <>
-      <Title>{title}</Title>
-      <Body>{body}</Body>
-      <IdText>ID: {id}</IdText>
+      <PostTitle>{title}</PostTitle>
+      <PostBody>{body}</PostBody>
+      <PostId>ID: {id}</PostId>
     </>
   );
 };
 
-export const Title = styled(Typography)`
+const PostTitle = styled(Typography)`
   line-height: 90%;
   margin: 24px auto;
 
@@ -39,7 +39,7 @@ export const Title = styled(Typography)`
   }
 `;
 
-const Body = styled(Typography)`
+const PostBody = styled(Typography)`
   font-size: 16px;
 
   ${mediaWidth.s} {
@@ -51,9 +51,11 @@ const Body = styled(Typography)`
   }
 `;
 
-const IdText = styled(Typography)`
+const PostId = styled(Typography)`
   font-size: 12px;
   font-weight: 300;
 `;
+
+export { Post, PostTitle, PostBody, PostId };
 
 export default Post;
