@@ -1,8 +1,11 @@
+import React from 'react';
 import { useRouter } from 'next/router';
+import Post from '../../components/Post';
 
-const Post: React.FC = () => {
+const PostPage: React.FC = () => {
   const router = useRouter();
-  return <h1>Post {router.query.postId}</h1>;
+  //router.query.postId
+  return <Post title={'test'} body={'body test'} />;
 };
 
-export default Post;
+export default PostPage;
