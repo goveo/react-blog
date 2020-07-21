@@ -1,15 +1,24 @@
 import React, { useCallback } from 'react';
+import { connect, ConnectedProps } from 'react-redux';
 import styled, { css } from 'styled-components';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { TextField, Button } from '@material-ui/core';
+import { addPost } from '../../store/actions/postsActions';
+import Router from 'next/router';
 
-const AddPostForm: React.FC = () => {
+const connector = connect(null, { addPost });
+
+const AddPostForm: React.FC<ConnectedProps<typeof connector>> = ({ addPost }) => {
   const initialValues = { title: '', body: '' };
 
-  const onSubmit = useCallback(async (values) => {
-    alert(JSON.stringify(values, null, 2));
-  }, []);
+  const onSubmit = useCallback(
+    (postPayload) => {
+      addPost(postPayload);
+      Router.push('/');
+    },
+    [addPost],
+  );
 
   return (
     <Formik
@@ -49,7 +58,7 @@ const AddPostForm: React.FC = () => {
               color="primary"
               disabled={!(isValid && dirty) || isSubmitting}
             >
-              Add new task
+              Add new post
             </SubmitButton>
           </Form>
         );
@@ -71,4 +80,4 @@ const SubmitButton = styled(Button)`
   ${formElement}
 `;
 
-export default AddPostForm;
+export default connector(AddPostForm);
