@@ -3,15 +3,15 @@ import { connect, ConnectedProps } from 'react-redux';
 import { useRouter } from 'next/router';
 import Post from '../../components/Post';
 import { PostsState } from '../../store/actions/types';
-import { loadPost } from '../../store/actions/postsActions';
+import { loadPost, clearPost } from '../../store/actions/postsActions';
 import Page from '../../components/Page';
 
 const mapStateToProps = (state: { posts: PostsState }) => ({
   post: state.posts.post,
 });
-const connector = connect(mapStateToProps, { loadPost });
+const connector = connect(mapStateToProps, { loadPost, clearPost });
 
-const PostPage: React.FC<ConnectedProps<typeof connector>> = ({ post, loadPost }) => {
+const PostPage: React.FC<ConnectedProps<typeof connector>> = ({ post, loadPost, clearPost }) => {
   const router = useRouter();
 
   const postId = useMemo(() => {
@@ -20,7 +20,10 @@ const PostPage: React.FC<ConnectedProps<typeof connector>> = ({ post, loadPost }
 
   useEffect(() => {
     if (postId) loadPost(postId);
-  }, [loadPost, postId]);
+    return () => {
+      clearPost();
+    };
+  }, [clearPost, loadPost, postId]);
 
   return (
     <Page>

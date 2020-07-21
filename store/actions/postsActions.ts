@@ -1,4 +1,4 @@
-import { GET_POSTS, GET_POST, ADD_POST, Post, PostsActionTypes } from './types';
+import { GET_POSTS, GET_POST, CLEAR_POST, Post, PostsActionTypes } from './types';
 
 import { LOAD_ALL_POSTS_ASYNC, LOAD_POST_ASYNC, ADD_POST_ASYNC, PostsActionSagaTypes } from '../sagas/types.sagas';
 
@@ -8,6 +8,7 @@ export const setPosts = (posts: Post[]): PostsActionTypes => ({ type: GET_POSTS,
 
 export const loadPost = (id: number): PostsActionSagaTypes => ({ type: LOAD_POST_ASYNC, payload: id });
 export const setPost = (post: Post): PostsActionTypes => ({ type: GET_POST, payload: post });
+export const clearPost = (): PostsActionTypes => ({ type: CLEAR_POST });
 
 // Add Post
 export const addPost = (post: Post): PostsActionSagaTypes => ({ type: ADD_POST_ASYNC, payload: post });

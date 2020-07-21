@@ -1,17 +1,21 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import styled from 'styled-components';
+import { Typography, Divider } from '@material-ui/core';
 import Page from '../components/Page';
 import PostsList from '../components/PostsList';
 
 const Home: React.FC = () => {
   return (
     <Page>
-      <Typography variant="h2" component="h1">
-        Home
-      </Typography>
+      <Typography variant="h3">Posts:</Typography>
+      <StyledDivider />
       <PostsList />
     </Page>
   );
 };
+
+const StyledDivider = styled(Divider)`
+  margin: 20px 0;
+`;
 
 export default Home;

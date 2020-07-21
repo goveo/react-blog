@@ -1,5 +1,6 @@
 export const GET_POSTS = 'GET_POSTS';
 export const GET_POST = 'GET_POST';
+export const CLEAR_POST = 'CLEAR_POST';
 export const ADD_POST = 'ADD_POST';
 
 export interface Post {
@@ -24,9 +25,13 @@ export interface GetPostAction {
   payload: Post;
 }
 
+export interface ClearPostAction {
+  type: typeof CLEAR_POST;
+}
+
 export interface AddPostAction {
   type: typeof ADD_POST;
   payload: Post;
 }
 
-export type PostsActionTypes = GetPostsAction | GetPostAction | AddPostAction;
+export type PostsActionTypes = GetPostsAction | GetPostAction | ClearPostAction | AddPostAction;

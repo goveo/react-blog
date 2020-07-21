@@ -1,8 +1,8 @@
-import { GET_POSTS, GET_POST, ADD_POST, PostsActionTypes, PostsState, Post } from '../actions/types';
+import { GET_POSTS, GET_POST, ADD_POST, PostsActionTypes, PostsState, CLEAR_POST } from '../actions/types';
 
 const initialState = {
   posts: [],
-  post: {} as Post,
+  post: null,
   loading: true,
 };
 
@@ -18,6 +18,12 @@ export default (state = initialState, action: PostsActionTypes): PostsState => {
       return {
         ...state,
         post: action.payload,
+        loading: false,
+      };
+    case CLEAR_POST:
+      return {
+        ...state,
+        post: null,
         loading: false,
       };
     case ADD_POST:

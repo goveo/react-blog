@@ -1,14 +1,15 @@
 {
   "presets": [
+    "next/babel"
+  ],
+  "plugins": [
     [
-      "next/babel",
+      "styled-components",
       {
-        "preset-env": {},
-        "transform-runtime": {},
-        "styled-jsx": {},
-        "class-properties": {}
+        "ssr": true,
+        "displayName": true,
+        "preprocess": false
       }
     ]
-  ],
-  "plugins": ["babel-plugin-styled-components"]
+  ]
 }
