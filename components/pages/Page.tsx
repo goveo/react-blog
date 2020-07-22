@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
-import { useRouter } from 'next/router';
-import Navbar from '../Navbar';
-import { Container, Grid, Typography, Link } from '@material-ui/core';
-import Loader from '../Loader';
 import NextLink from 'next/link';
+import { useRouter } from 'next/router';
+import { Container, Grid, Typography, Link } from '@material-ui/core';
+import Navbar from '../Navbar';
+import Loader from '../Loader';
+import { mediaWidth } from '../../lib/media/mediaWidth';
 
 export interface PageProps {
   title?: string;
@@ -74,7 +75,11 @@ export const Page: React.FC<PageProps> = ({
 };
 
 const Content = styled(Container)`
-  margin-top: 30px;
+  margin-top: 24px;
+
+  ${mediaWidth.s} {
+    margin-top: 48px;
+  }
 `;
 
 const ErrorContainer = styled.div`
