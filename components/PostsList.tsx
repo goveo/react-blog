@@ -39,6 +39,7 @@ const PostsList: React.FC<ConnectedProps<typeof connector>> = ({ posts, loading,
 
 const ListItem = styled(PostListItem)`
   margin-bottom: 20px;
+  word-wrap: break-word;
 `;
 
 export default connector(PostsList);

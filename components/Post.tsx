@@ -22,6 +22,7 @@ const Post: React.FC<PostProps> = ({ id, title, body }) => {
 const PostTitle = styled(Typography)`
   line-height: 90%;
   margin: 24px auto;
+  word-wrap: break-word;
 
   font-weight: bold;
   font-size: 32px;
@@ -41,6 +42,7 @@ const PostTitle = styled(Typography)`
 
 const PostBody = styled(Typography)`
   font-size: 16px;
+  word-wrap: break-word;
 
   ${mediaWidth.s} {
     font-size: 18px;
