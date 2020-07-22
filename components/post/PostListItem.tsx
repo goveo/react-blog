@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { ListItem, ListItemText, Card, CardContent, Typography } from '@material-ui/core';
-import { mediaWidth } from '../lib/media/mediaWidth';
+import { mediaWidth } from '../../lib/media/mediaWidth';
 
 interface Props {
   title: string;
@@ -32,22 +32,10 @@ const PostsListItem: React.FC<Props> = ({ title, id, ...restProps }) => {
 
 const PostTitle = styled(Typography)`
   line-height: 90%;
-  margin: 24px auto;
+  margin: 12px auto;
 
   font-weight: bold;
-  font-size: 32px;
-
-  ${mediaWidth.s} {
-    font-size: 40px;
-  }
-
-  ${mediaWidth.m} {
-    font-size: 48px;
-  }
-
-  ${mediaWidth.l} {
-    font-size: 56px;
-  }
+  font-size: 28px;
 `;
 
 const PostId = styled(Typography)`

@@ -2,12 +2,12 @@ import React, { useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import { connect, ConnectedProps } from 'react-redux';
 import { useRouter } from 'next/router';
-import Post from '../../components/Post';
+import Post from '../../components/post/Post';
 import { PostsState } from '../../store/actions/types';
 import { loadPost, clearPost, setError } from '../../store/actions/postsActions';
 import Page from '../../components/pages/Page';
 import AddCommentForm from '../../components/forms/AddCommentForm';
-import CommentsList from '../../components/CommentsList';
+import CommentsList from '../../components/comment/CommentsList';
 
 const mapStateToProps = (state: { posts: PostsState }) => ({
   post: state.posts.post,

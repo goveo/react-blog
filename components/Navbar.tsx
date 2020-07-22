@@ -31,6 +31,7 @@ const FlexGrow = styled.div`
 
 const NavbarTitle = styled(Typography)`
   font-weight: bold;
+  font-size: 20px;
 `;
 
 export default Navbar;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import styled from 'styled-components';
-import { mediaWidth } from '../lib/media/mediaWidth';
+import { mediaWidth } from '../../lib/media/mediaWidth';
 
 export interface PostProps {
   id: number;
