@@ -18,6 +18,7 @@
     },
     "rules": {
       "react/jsx-uses-vars": ["error"],
+      "react/jsx-uses-react": ["error"],
       "@typescript-eslint/no-var-requires": "off",
       "no-trailing-spaces": ["error"],
       "no-console": ["warn", { "allow": ["warn", "error"] }],
@@ -33,6 +34,6 @@
       "switch-colon-spacing": ["error", {"after": true, "before": false}],
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
-      "object-curly-spacing": ["error", "always"]
+      "object-curly-spacing": ["error", "always"],
     }
 }

@@ -43,7 +43,7 @@ const PostPage: React.FC<ConnectedProps<typeof connector>> = ({
 
   return (
     <Page loading={loading} error={error}>
-      {!loading && !error && post && (
+      {!error && post && (
         <>
           <Post {...post} />
 

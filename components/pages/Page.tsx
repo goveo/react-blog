@@ -20,7 +20,7 @@ export const Page: React.FC<PageProps> = ({
   description = 'Develops Today test',
   loading,
   error,
-  showHomeLink = false,
+  showHomeLink = true, // works only on error pages
   children,
 }) => {
   const router = useRouter();
