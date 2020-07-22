@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
-import { setPosts, setPost } from '../actions/postsActions';
+import { setPosts, setPost, setLoading, loadAllPosts } from '../actions/postsActions';
 import {
   LOAD_ALL_POSTS_ASYNC,
   LOAD_POST_ASYNC,
@@ -13,6 +13,7 @@ import { Post } from '../actions/types';
 // Get Posts
 export function* loadAllPostsAsync() {
   try {
+    yield put(setLoading());
     const { data: posts }: { data: Post[] } = yield call(axios.get, '/posts/');
     yield put(setPosts(posts));
   } catch (error) {
@@ -23,6 +24,7 @@ export function* loadAllPostsAsync() {
 // Get Single Post
 export function* loadPostAsync(action: LoadPostAsyncAction) {
   try {
+    yield put(setLoading());
     const { data: post }: { data: Post } = yield call(axios.get, `/posts/${action.payload}`);
     yield put(setPost(post));
   } catch (error) {
@@ -33,8 +35,10 @@ export function* loadPostAsync(action: LoadPostAsyncAction) {
 // Add Post
 export function* addPostAsync(action: AddPostAsyncAction) {
   try {
+    yield put(setLoading());
     const { data: post }: { data: Post } = yield call(axios.post, '/posts/', action.payload);
     yield put(setPost(post));
+    yield put(loadAllPosts());
   } catch (error) {
     console.error(error.message);
   }

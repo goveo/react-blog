@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
+import styled from 'styled-components';
 import { connect, ConnectedProps } from 'react-redux';
+import Loader from './Loader';
 import { List } from '@material-ui/core';
 import { PostProps } from './Post';
 
@@ -8,7 +10,6 @@ import { PostsState } from '../store/actions/types';
 import AddPostButton from './buttons/AddPostButton';
 import { lastPostsSelector } from '../store/selectors/postsSelector';
 import PostListItem from './PostListItem';
-import styled from 'styled-components';
 
 const mapStateToProps = (state: { posts: PostsState }) => ({
   posts: lastPostsSelector(state.posts),
@@ -25,11 +26,15 @@ const PostsList: React.FC<ConnectedProps<typeof connector>> = ({ posts, loading,
   return (
     <>
       <AddPostButton />
-      <List aria-label="posts">
-        {posts.map((post: PostProps) => (
-          <ListItem title={post.title} id={post.id} key={post.id.toString()} />
-        ))}
-      </List>
+      {loading ? (
+        <Loader />
+      ) : (
+        <List aria-label="posts">
+          {posts.map((post: PostProps) => (
+            <ListItem title={post.title} id={post.id} key={post.id.toString()} />
+          ))}
+        </List>
+      )}
     </>
   );
 };
