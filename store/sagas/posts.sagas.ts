@@ -34,7 +34,6 @@ export function* loadPostAsync(action: LoadPostAsyncAction) {
 export function* addPostAsync(action: AddPostAsyncAction) {
   try {
     const { data: post }: { data: Post } = yield call(axios.post, '/posts/', action.payload);
-    console.log('post : ', post);
     yield put(setPost(post));
   } catch (error) {
     console.error(error.message);

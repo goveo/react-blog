@@ -7,9 +7,10 @@ import { PostProps, PostTitle } from './Post';
 import { loadAllPosts } from '../store/actions/postsActions';
 import { PostsState } from '../store/actions/types';
 import AddPostButton from './buttons/AddPostButton';
+import { lastPostsSelector } from '../store/selectors/postsSelector';
 
 const mapStateToProps = (state: { posts: PostsState }) => ({
-  posts: state.posts.posts,
+  posts: lastPostsSelector(state.posts),
   loading: state.posts.loading,
 });
 const connector = connect(mapStateToProps, { loadAllPosts });

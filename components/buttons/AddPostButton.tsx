@@ -37,6 +37,7 @@ const AddFab = styled(Fab)`
   position: fixed;
   bottom: 20px;
   right: 20px;
+  z-index: 1;
 `;
 
 export default AddPostButton;
