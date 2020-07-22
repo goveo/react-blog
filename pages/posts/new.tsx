@@ -1,5 +1,5 @@
 import React from 'react';
-import Page from '../../components/Page';
+import Page from '../../components/pages/Page';
 import AddPostForm from '../../components/forms/AddPostForm';
 import { Grid, Typography } from '@material-ui/core';
 import Router from 'next/router';

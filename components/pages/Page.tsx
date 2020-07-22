@@ -2,17 +2,27 @@ import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
-import Navbar from './Navbar';
-import { Container, Grid } from '@material-ui/core';
-import Loader from './Loader';
+import Navbar from '../Navbar';
+import { Container, Grid, Typography, Link } from '@material-ui/core';
+import Loader from '../Loader';
+import NextLink from 'next/link';
 
-interface Props {
+export interface PageProps {
   title?: string;
   description?: string;
   loading?: boolean;
+  error?: string;
+  showHomeLink?: boolean;
 }
 
-const Page: React.FC<Props> = ({ title = 'React-blog', description = 'Develops Today test', loading, children }) => {
+export const Page: React.FC<PageProps> = ({
+  title = 'React-blog',
+  description = 'Develops Today test',
+  loading,
+  error,
+  showHomeLink = false,
+  children,
+}) => {
   const router = useRouter();
   const [routerLoading, setRouterLoading] = useState(false);
 
@@ -30,6 +40,7 @@ const Page: React.FC<Props> = ({ title = 'React-blog', description = 'Develops T
       router.events.off('routeChangeError', handleComplete);
     };
   });
+
   return (
     <>
       <Head>
@@ -40,7 +51,22 @@ const Page: React.FC<Props> = ({ title = 'React-blog', description = 'Develops T
       {(loading || routerLoading) && <Loader />}
       <Grid container direction="row" justify="center" alignItems="center">
         <Grid item xs={12} sm={9} md={8} lg={6}>
-          <Content>{children}</Content>
+          <Content>
+            {!loading && !error && <>{children}</>}
+            {!loading && error && (
+              <ErrorContainer>
+                <ErrorTitle>{error}</ErrorTitle>
+                <>{children}</>
+                {showHomeLink && (
+                  <NextLink href="/">
+                    <Link>
+                      <ErrorLinkText>Back to Home</ErrorLinkText>
+                    </Link>
+                  </NextLink>
+                )}
+              </ErrorContainer>
+            )}
+          </Content>
         </Grid>
       </Grid>
     </>
@@ -49,6 +75,19 @@ const Page: React.FC<Props> = ({ title = 'React-blog', description = 'Develops T
 
 const Content = styled(Container)`
   margin-top: 30px;
+`;
+
+const ErrorContainer = styled.div`
+  text-align: center;
+`;
+
+const ErrorTitle = styled(Typography)`
+  font-size: 36px;
+  font-weight: bold;
+`;
+
+const ErrorLinkText = styled(Typography)`
+  font-size: 16px;
 `;
 
 export default Page;

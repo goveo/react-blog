@@ -1,4 +1,4 @@
-import { GET_POSTS, GET_POST, CLEAR_POST, SET_LOADING, Post, PostsActionTypes } from './types';
+import { GET_POSTS, GET_POST, CLEAR_POST, SET_LOADING, Post, PostsActionTypes, SET_ERROR } from './types';
 
 import {
   LOAD_ALL_POSTS_ASYNC,
@@ -29,3 +29,6 @@ export const addComment = (comment: CommentPayload): PostsActionSagaTypes => ({
 
 // Set loading
 export const setLoading = (): PostsActionTypes => ({ type: SET_LOADING });
+
+// Set error
+export const setError = (error: string): PostsActionTypes => ({ type: SET_ERROR, payload: error });

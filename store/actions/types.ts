@@ -4,6 +4,7 @@ export const CLEAR_POST = 'CLEAR_POST';
 export const ADD_POST = 'ADD_POST';
 export const COMMENT_POST = 'COMMENT_POST';
 export const SET_LOADING = 'SET_LOADING';
+export const SET_ERROR = 'SET_ERROR';
 
 export interface Comment {
   id: number;
@@ -22,6 +23,7 @@ export interface PostsState {
   posts: Post[];
   post: Post;
   loading: boolean;
+  error: string;
 }
 
 export interface GetPostsAction {
@@ -52,10 +54,16 @@ export interface SetLoadingAction {
   type: typeof SET_LOADING;
 }
 
+export interface SetErrorAction {
+  type: typeof SET_ERROR;
+  payload: string;
+}
+
 export type PostsActionTypes =
   | GetPostsAction
   | GetPostAction
   | ClearPostAction
   | AddPostAction
   | CommentPostAction
-  | SetLoadingAction;
+  | SetLoadingAction
+  | SetErrorAction;

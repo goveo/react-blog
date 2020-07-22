@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
-import { setPosts, setPost, setLoading, loadAllPosts, loadPost } from '../actions/postsActions';
+import { setPosts, setPost, setLoading, loadAllPosts, loadPost, setError } from '../actions/postsActions';
 import {
   LOAD_ALL_POSTS_ASYNC,
   LOAD_POST_ASYNC,
@@ -20,6 +20,7 @@ export function* loadAllPostsAsync() {
     yield put(setPosts(posts));
   } catch (error) {
     console.error(error.message);
+    yield put(setError(error.message));
   }
 }
 
@@ -33,6 +34,7 @@ export function* loadPostAsync(action: LoadPostAsyncAction) {
     yield put(setPost(newPost));
   } catch (error) {
     console.error(error.message);
+    yield put(setError(error.message));
   }
 }
 
@@ -45,6 +47,7 @@ export function* addPostAsync(action: AddPostAsyncAction) {
     yield put(loadAllPosts());
   } catch (error) {
     console.error(error.message);
+    yield put(setError(error.message));
   }
 }
 
@@ -56,6 +59,7 @@ export function* commentPostAsync(action: CommentPostAsyncAction) {
     yield put(loadPost(comment.postId));
   } catch (error) {
     console.error(error.message);
+    yield put(setError(error.message));
   }
 }
 
