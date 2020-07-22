@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import Link from 'next/link';
-import { List, ListItem, ListItemText } from '@material-ui/core';
-import { PostProps, PostTitle } from './Post';
+import { List } from '@material-ui/core';
+import { PostProps } from './Post';
 
 import { loadAllPosts } from '../store/actions/postsActions';
 import { PostsState } from '../store/actions/types';
 import AddPostButton from './buttons/AddPostButton';
 import { lastPostsSelector } from '../store/selectors/postsSelector';
+import PostListItem from './PostListItem';
+import styled from 'styled-components';
 
 const mapStateToProps = (state: { posts: PostsState }) => ({
   posts: lastPostsSelector(state.posts),
@@ -26,15 +27,15 @@ const PostsList: React.FC<ConnectedProps<typeof connector>> = ({ posts, loading,
       <AddPostButton />
       <List aria-label="posts">
         {posts.map((post: PostProps) => (
-          <Link href={'posts/[postId]'} as={`posts/${post.id}`} key={post.id.toString()}>
-            <ListItem button>
-              <ListItemText primary={<PostTitle>{post.title}</PostTitle>} />
-            </ListItem>
-          </Link>
+          <ListItem title={post.title} id={post.id} key={post.id.toString()} />
         ))}
       </List>
     </>
   );
 };
+
+const ListItem = styled(PostListItem)`
+  margin-bottom: 20px;
+`;
 
 export default connector(PostsList);

@@ -13,7 +13,7 @@ export const Navbar: React.FC<NavbarProps> = ({ title = 'React blog' }) => {
       <Grid container direction="row" justify="center" alignItems="center">
         <Grid item xs={12} sm={9} md={8} lg={6}>
           <Toolbar>
-            <Typography color="inherit">{title}</Typography>
+            <NavbarTitle color="inherit">{title}</NavbarTitle>
             <FlexGrow />
             <Link href="/">
               <Button color="inherit">Home</Button>
@@ -25,8 +25,12 @@ export const Navbar: React.FC<NavbarProps> = ({ title = 'React blog' }) => {
   );
 };
 
-const FlexGrow = styled('div')`
+const FlexGrow = styled.div`
   flex-grow: 1;
+`;
+
+const NavbarTitle = styled(Typography)`
+  font-weight: bold;
 `;
 
 export default Navbar;
