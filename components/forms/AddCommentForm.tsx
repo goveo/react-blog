@@ -38,17 +38,16 @@ const AddCommentForm: React.FC<AddCommentFormProps & ConnectedProps<typeof conne
       })}
     >
       {(props) => {
-        const { values, touched, errors, dirty, isSubmitting, isValid, handleChange, handleBlur, handleSubmit } = props;
+        const { values, dirty, isSubmitting, isValid, handleChange, handleBlur, handleSubmit } = props;
         return (
           <Form onSubmit={handleSubmit}>
             <FormInput
               id="comment"
-              label="Comment"
+              placeholder="Comment"
               value={values.comment}
               onChange={handleChange}
               onBlur={handleBlur}
-              error={Boolean(errors.comment && touched.comment)}
-              helperText={touched.comment && errors.comment}
+              multiline
             />
             <SubmitButton
               variant="outlined"

@@ -1,12 +1,13 @@
 import React, { useEffect, useMemo } from 'react';
+import styled from 'styled-components';
 import { connect, ConnectedProps } from 'react-redux';
 import { useRouter } from 'next/router';
 import Post from '../../components/Post';
 import { PostsState } from '../../store/actions/types';
 import { loadPost, clearPost } from '../../store/actions/postsActions';
 import Page from '../../components/Page';
-import { Typography, List, ListItem, ListItemText } from '@material-ui/core';
 import AddCommentForm from '../../components/forms/AddCommentForm';
+import CommentsList from '../../components/CommentsList';
 
 const mapStateToProps = (state: { posts: PostsState }) => ({
   post: state.posts.post,
@@ -33,25 +34,17 @@ const PostPage: React.FC<ConnectedProps<typeof connector>> = ({ post, loading, l
       <Post {...post} />
 
       {post && (
-        <>
-          <Typography>Comments: </Typography>
-          {post.comments && post.comments.length > 0 ? (
-            <List aria-label="comments">
-              {post.comments.map((comment) => (
-                <ListItem key={comment.id.toString()}>
-                  <ListItemText primary={comment.body} />
-                </ListItem>
-              ))}
-            </List>
-          ) : (
-            'No comments'
-          )}
-
+        <CommentsWrapper>
+          <CommentsList comments={post.comments} />
           <AddCommentForm postId={post.id} />
-        </>
+        </CommentsWrapper>
       )}
     </Page>
   );
 };
+
+const CommentsWrapper = styled.div`
+  margin: 30px 0;
+`;
 
 export default connector(PostPage);
