@@ -4,33 +4,37 @@ import styled, { css } from 'styled-components';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { TextField, Button } from '@material-ui/core';
-import { addPost } from '../../store/actions/postsActions';
+import { addComment } from '../../store/actions/postsActions';
 
-const connector = connect(null, { addPost });
+const connector = connect(null, { addComment });
 
-export interface AddPostFormProps {
+export interface AddCommentFormProps {
   onSubmit?: () => void;
+  postId: number;
 }
 
-const AddPostForm: React.FC<AddPostFormProps & ConnectedProps<typeof connector>> = ({ onSubmit, addPost }) => {
-  const initialValues = { title: '', body: '' };
+const AddCommentForm: React.FC<AddCommentFormProps & ConnectedProps<typeof connector>> = ({
+  onSubmit,
+  postId,
+  addComment,
+}) => {
+  const initialValues = { comment: '' };
 
-  const onSubmitFrom = useCallback(
-    (postPayload, { resetForm }) => {
-      addPost(postPayload);
+  const onFormSubmit = useCallback(
+    ({ comment }, { resetForm }) => {
+      addComment({ body: comment, postId });
       resetForm();
       if (onSubmit) onSubmit();
     },
-    [addPost, onSubmit],
+    [addComment, onSubmit, postId],
   );
 
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={onSubmitFrom}
+      onSubmit={onFormSubmit}
       validationSchema={Yup.object().shape({
-        title: Yup.string().required('Field is required'),
-        body: Yup.string().required('Field is required'),
+        comment: Yup.string().required('Field is required'),
       })}
     >
       {(props) => {
@@ -38,23 +42,13 @@ const AddPostForm: React.FC<AddPostFormProps & ConnectedProps<typeof connector>>
         return (
           <Form onSubmit={handleSubmit}>
             <FormInput
-              id="title"
-              label="Title"
-              value={values.title}
+              id="comment"
+              label="Comment"
+              value={values.comment}
               onChange={handleChange}
               onBlur={handleBlur}
-              error={Boolean(errors.title && touched.title)}
-              helperText={touched.title && errors.title}
-            />
-            <FormInput
-              id="body"
-              label="Body"
-              value={values.body}
-              multiline
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={Boolean(errors.body && touched.body)}
-              helperText={touched.body && errors.body}
+              error={Boolean(errors.comment && touched.comment)}
+              helperText={touched.comment && errors.comment}
             />
             <SubmitButton
               variant="outlined"
@@ -62,7 +56,7 @@ const AddPostForm: React.FC<AddPostFormProps & ConnectedProps<typeof connector>>
               color="primary"
               disabled={!(isValid && dirty) || isSubmitting}
             >
-              Add new post
+              Add comment
             </SubmitButton>
           </Form>
         );
@@ -84,4 +78,4 @@ const SubmitButton = styled(Button)`
   ${formElement}
 `;
 
-export default connector(AddPostForm);
+export default connector(AddCommentForm);

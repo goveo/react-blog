@@ -2,6 +2,7 @@ import React from 'react';
 import Page from '../../components/Page';
 import AddPostForm from '../../components/forms/AddPostForm';
 import { Grid, Typography } from '@material-ui/core';
+import Router from 'next/router';
 
 const CreatePostPage: React.FC = () => {
   return (
@@ -11,7 +12,7 @@ const CreatePostPage: React.FC = () => {
           <Typography align="center" variant="h4" component="h1">
             Add new post
           </Typography>
-          <AddPostForm />
+          <AddPostForm onSubmit={() => Router.push('/')} />
         </Grid>
       </Grid>
     </Page>
