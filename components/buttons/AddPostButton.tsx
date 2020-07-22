@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import { Button, Fab } from '@material-ui/core';
 import Link from 'next/link';
@@ -13,19 +13,31 @@ export interface AddPostButtonProps {
 
 const AddPostButton: React.FC<AddPostButtonProps> = ({ text = 'Add post' }) => {
   const { width } = useWindowDimensions();
-  return (
-    <Link href="/posts/new" as="/posts/new">
-      {width > ScreenWidth.S ? (
+
+  const button = useMemo(() => {
+    if (!width) return null;
+    if (width > ScreenWidth.S) {
+      // on desktop show outline button
+      return (
         <AddButton color="primary" variant="outlined" aria-label="add" startIcon={<AddIcon />}>
           {text}
         </AddButton>
-      ) : (
+      );
+    } else {
+      // on mobile devices show fab
+      return (
         <AddFab color="primary" aria-label="add">
           <AddIcon />
         </AddFab>
-      )}
+      );
+    }
+  }, [width, text]);
+
+  return width && button ? (
+    <Link href="/posts/new" as="/posts/new">
+      {button}
     </Link>
-  );
+  ) : null;
 };
 
 const AddButton = styled(Button)`
