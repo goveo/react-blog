@@ -8,10 +8,11 @@ import Page from '../../components/Page';
 
 const mapStateToProps = (state: { posts: PostsState }) => ({
   post: state.posts.post,
+  loading: state.posts.loading,
 });
 const connector = connect(mapStateToProps, { loadPost, clearPost });
 
-const PostPage: React.FC<ConnectedProps<typeof connector>> = ({ post, loadPost, clearPost }) => {
+const PostPage: React.FC<ConnectedProps<typeof connector>> = ({ post, loading, loadPost, clearPost }) => {
   const router = useRouter();
 
   const postId = useMemo(() => {
@@ -26,7 +27,7 @@ const PostPage: React.FC<ConnectedProps<typeof connector>> = ({ post, loadPost, 
   }, [clearPost, loadPost, postId]);
 
   return (
-    <Page>
+    <Page loading={loading}>
       <Post {...post} />
     </Page>
   );

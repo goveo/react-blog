@@ -7,7 +7,6 @@ import { PostProps } from './Post';
 
 import { loadAllPosts } from '../store/actions/postsActions';
 import { PostsState } from '../store/actions/types';
-import AddPostButton from './buttons/AddPostButton';
 import { lastPostsSelector } from '../store/selectors/postsSelector';
 import PostListItem from './PostListItem';
 
@@ -25,7 +24,6 @@ const PostsList: React.FC<ConnectedProps<typeof connector>> = ({ posts, loading,
 
   return (
     <>
-      <AddPostButton />
       {loading ? (
         <Loader />
       ) : (
